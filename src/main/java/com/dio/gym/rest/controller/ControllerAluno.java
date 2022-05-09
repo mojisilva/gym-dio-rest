@@ -1,6 +1,7 @@
 package com.dio.gym.rest.controller;
 
 import com.dio.gym.rest.entity.Aluno;
+import com.dio.gym.rest.entity.form.AlunoUpdateForm;
 import com.dio.gym.rest.service.ServiceAluno;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,20 @@ public class ControllerAluno {
         return serviceAluno.buscarAluno(id);
     }
 
+    @GetMapping
+    public Iterable<Aluno> listarAluno(){
+        return serviceAluno.listarAluno();
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Aluno atualizarAluno(@PathVariable Long id, @RequestBody @Valid Aluno aluno){
+        return serviceAluno.atualizarAluno(id, aluno);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarAluno(@PathVariable Long id){
+        serviceAluno.deletarAluno(id);
+    }
 }
